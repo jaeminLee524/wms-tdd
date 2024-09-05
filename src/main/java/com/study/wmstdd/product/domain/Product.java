@@ -13,6 +13,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
+import org.springframework.util.Assert;
 
 @Getter
 @Entity
@@ -69,6 +70,17 @@ public class Product {
         TemperatureZone temperatureZone,
         Long weightInGrams,
         ProductSize productSize) {
+
+        Assert.notNull(name, "상품명은 필수입니다.");
+        Assert.notNull(code, "상품코드는 필수입니다.");
+        Assert.notNull(description, "상품설명은 필수입니다.");
+        Assert.notNull(brand, "브랜드는 필수입니다.");
+        Assert.notNull(maker, "제조사는 필수입니다.");
+        Assert.notNull(origin, "원산지는 필수입니다.");
+        Assert.notNull(category, "카테고리는 필수입니다.");
+        Assert.notNull(temperatureZone, "온도대는 필수입니다.");
+        Assert.notNull(weightInGrams, "무게(그램)은 필수입니다.");
+        Assert.notNull(productSize, "상품 크기는 필수입니다.");
 
         this.name = name;
         this.code = code;
