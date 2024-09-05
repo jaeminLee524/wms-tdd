@@ -1,5 +1,6 @@
 package com.study.wmstdd.product.feature.api;
 
+import com.study.wmstdd.product.common.Scenario;
 import com.study.wmstdd.product.domain.Category;
 import com.study.wmstdd.product.domain.TemperatureZone;
 import com.study.wmstdd.product.feature.RegisterProduct.Request;
@@ -25,7 +26,7 @@ public class RegisterProductApi {
         return this;
     }
 
-    public void request() {
+    public Scenario request() {
         // given
         Request request = new Request(
             name,
@@ -50,5 +51,7 @@ public class RegisterProductApi {
             .post("/products")
             .then().log().all()
             .statusCode(HttpStatus.CREATED.value());
+
+        return new Scenario();
     }
 }

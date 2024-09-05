@@ -1,8 +1,8 @@
 package com.study.wmstdd.product.feature;
 
 import com.study.wmstdd.product.common.ApiTest;
+import com.study.wmstdd.product.common.Scenario;
 import com.study.wmstdd.product.domain.ProductRepository;
-import com.study.wmstdd.product.feature.api.RegisterProductApi;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ class RegisterProductTest extends ApiTest {
     @DisplayName("상품을 등록한다.")
     @Test
     void registerProduct() {
-        new RegisterProductApi().request();
+        Scenario.registerProduct().request();
 
         // then
         Assertions.assertThat(productRepository.findAll()).hasSize(1);
