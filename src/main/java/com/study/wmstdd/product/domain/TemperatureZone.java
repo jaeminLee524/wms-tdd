@@ -1,4 +1,4 @@
-package com.study.wmstdd.product.feature;
+package com.study.wmstdd.product.domain;
 
 public enum TemperatureZone {
     ROOM_TEMPERATURE("상온");

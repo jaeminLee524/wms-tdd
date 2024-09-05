@@ -1,14 +1,26 @@
 package com.study.wmstdd.product.feature;
 
+import com.study.wmstdd.product.domain.Category;
+import com.study.wmstdd.product.domain.Product;
+import com.study.wmstdd.product.domain.ProductRepository;
+import com.study.wmstdd.product.domain.ProductSize;
+import com.study.wmstdd.product.domain.TemperatureZone;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+@RequiredArgsConstructor
+@RestController
 public class RegisterProduct {
 
     private final ProductRepository productRepository;
 
-    public RegisterProduct(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
-
-    public void request(Request request) {
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/products")
+    public void request(@RequestBody Request request) {
         Product product = request.toDomain();
 
         productRepository.save(product);
