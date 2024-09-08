@@ -1,13 +1,12 @@
 package com.study.wmstdd.product.inbound.feature;
 
+import static org.mockito.ArgumentMatchers.anyLong;
+
 import com.study.wmstdd.inbound.domain.InboundRepository;
 import com.study.wmstdd.inbound.feature.RegisterInboundController;
 import com.study.wmstdd.inbound.feature.RegisterInboundController.Request.Item;
-import com.study.wmstdd.product.domain.Category;
-import com.study.wmstdd.product.domain.Product;
 import com.study.wmstdd.product.domain.ProductRepository;
-import com.study.wmstdd.product.domain.ProductSize;
-import com.study.wmstdd.product.domain.TemperatureZone;
+import com.study.wmstdd.product.fixture.ProductFixture;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -34,18 +33,8 @@ public class RegisterInboundControllerTest {
     @Test
     void registerInbound() {
         // given
-        Product value = new Product("name",
-            "code",
-            "description",
-            "brand",
-            "maker",
-            "origin",
-            Category.ELECTRONICS,
-            TemperatureZone.ROOM_TEMPERATURE,
-            1000L,
-            new ProductSize(100L, 100L, 100L));
-
-        Mockito.when(productRepository.findById(1L)).thenReturn(Optional.of(value));
+        Mockito.when(productRepository.findById(anyLong()))
+            .thenReturn(Optional.of(ProductFixture.aProduct().build()));
 
         Long productNo = 1L;
         Long quantity = 1L;
