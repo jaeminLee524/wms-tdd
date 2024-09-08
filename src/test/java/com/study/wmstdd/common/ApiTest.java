@@ -1,4 +1,4 @@
-package com.study.wmstdd.product.common;
+package com.study.wmstdd.common;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;

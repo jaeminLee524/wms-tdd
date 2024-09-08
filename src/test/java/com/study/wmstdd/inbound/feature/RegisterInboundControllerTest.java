@@ -1,8 +1,8 @@
-package com.study.wmstdd.product.inbound.feature;
+package com.study.wmstdd.inbound.feature;
 
+import com.study.wmstdd.common.ApiTest;
+import com.study.wmstdd.common.Scenario;
 import com.study.wmstdd.inbound.domain.InboundRepository;
-import com.study.wmstdd.product.common.ApiTest;
-import com.study.wmstdd.product.common.Scenario;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

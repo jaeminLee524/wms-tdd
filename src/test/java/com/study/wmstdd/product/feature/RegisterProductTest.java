@@ -1,7 +1,7 @@
 package com.study.wmstdd.product.feature;
 
-import com.study.wmstdd.product.common.ApiTest;
-import com.study.wmstdd.product.common.Scenario;
+import com.study.wmstdd.common.ApiTest;
+import com.study.wmstdd.common.Scenario;
 import com.study.wmstdd.product.domain.ProductRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

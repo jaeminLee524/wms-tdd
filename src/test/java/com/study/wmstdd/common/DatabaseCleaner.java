@@ -1,4 +1,4 @@
-package com.study.wmstdd.product.common;
+package com.study.wmstdd.common;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

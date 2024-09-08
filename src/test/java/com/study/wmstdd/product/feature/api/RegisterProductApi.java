@@ -1,6 +1,6 @@
 package com.study.wmstdd.product.feature.api;
 
-import com.study.wmstdd.product.common.Scenario;
+import com.study.wmstdd.common.Scenario;
 import com.study.wmstdd.product.domain.Category;
 import com.study.wmstdd.product.domain.TemperatureZone;
 import com.study.wmstdd.product.feature.RegisterProduct.Request;
