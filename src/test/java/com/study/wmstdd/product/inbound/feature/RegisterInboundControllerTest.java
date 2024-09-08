@@ -5,28 +5,27 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import com.study.wmstdd.inbound.domain.InboundRepository;
 import com.study.wmstdd.inbound.feature.RegisterInboundController;
 import com.study.wmstdd.inbound.feature.RegisterInboundController.Request.Item;
+import com.study.wmstdd.product.common.ApiTest;
 import com.study.wmstdd.product.domain.ProductRepository;
 import com.study.wmstdd.product.fixture.ProductFixture;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import java.time.LocalDateTime;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 
-public class RegisterInboundControllerTest {
+public class RegisterInboundControllerTest extends ApiTest {
 
-    private RegisterInboundController registerInboundController;
+    @MockBean
     private ProductRepository productRepository;
+    @Autowired
     private InboundRepository inboundRepository;
-
-    @BeforeEach
-    void setUp() {
-        // stub
-        productRepository = Mockito.mock(ProductRepository.class);
-        inboundRepository = new InboundRepository();
-        registerInboundController = new RegisterInboundController(productRepository, inboundRepository);
-    }
 
     @DisplayName("입고를 등록한다.")
     @Test
@@ -55,11 +54,17 @@ public class RegisterInboundControllerTest {
             estimatedArrivalAt,
             inboundItems
         );
-        registerInboundController.request(request);
 
         // when
+        RestAssured.given().log().all()
+            .contentType(ContentType.JSON)
+            .body(request)
+            .when()
+            .post("/inbounds").then().log().all()
+            .statusCode(HttpStatus.CREATED.value());
+
 
         // then
+        Assertions.assertThat(inboundRepository.findAll()).hasSize(1);
     }
-
 }
