@@ -3,6 +3,7 @@ package com.study.wmstdd.inbound.feature;
 import com.study.wmstdd.inbound.domain.Inbound;
 import com.study.wmstdd.inbound.domain.InboundItem;
 import com.study.wmstdd.inbound.domain.InboundRepository;
+import com.study.wmstdd.inbound.feature.RegisterInboundController.Request.Item;
 import com.study.wmstdd.product.domain.ProductRepository;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,22 +21,32 @@ public class RegisterInboundController {
 
 
     public void request(Request request) {
-        List<InboundItem> inboundItems = request.inboundItems.stream()
-            .map(item -> new InboundItem(productRepository.findById(item.productNo).orElseThrow(),
-                item.quantity,
-                item.unitPrice,
-                item.description))
-            .toList();
+        Inbound inbound = createInbound(request);
 
-        Inbound inbound = new Inbound(
+        inboundRepository.save(inbound);
+    }
+
+    private Inbound createInbound(Request request) {
+        return new Inbound(
             request.title,
             request.description,
             request.orderRequestedAt,
             request.estimatedArrivalAt,
-            inboundItems
+            mapToInboundItems(request)
         );
+    }
 
-        inboundRepository.save(inbound);
+    private List<InboundItem> mapToInboundItems(Request request) {
+        return request.inboundItems.stream()
+            .map(this::newInboundItem)
+            .toList();
+    }
+
+    private InboundItem newInboundItem(Item item) {
+        return new InboundItem(productRepository.findProduct(item.productNo),
+            item.quantity,
+            item.unitPrice,
+            item.description);
     }
 
     public record Request(
