@@ -12,22 +12,19 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequiredArgsConstructor
 @RestController
 public class RegisterInboundController {
 
     private final ProductRepository productRepository;
     private final InboundRepository inboundRepository;
-
-    public RegisterInboundController(ProductRepository productRepository, InboundRepository inboundRepository) {
-        this.productRepository = productRepository;
-        this.inboundRepository = inboundRepository;
-    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/inbounds")
@@ -54,7 +51,8 @@ public class RegisterInboundController {
     }
 
     private InboundItem newInboundItem(Item item) {
-        return new InboundItem(productRepository.getBy(item.productNo),
+        return new InboundItem(
+            productRepository.getBy(item.productNo),
             item.quantity,
             item.unitPrice,
             item.description);
@@ -83,7 +81,6 @@ public class RegisterInboundController {
             Long unitPrice,
             @NotBlank(message = "상품 설명은 필수입니다.")
             String description) {
-
         }
     }
 }
