@@ -43,7 +43,7 @@ public class RegisterInboundController {
     }
 
     private InboundItem newInboundItem(Item item) {
-        return new InboundItem(productRepository.findProduct(item.productNo),
+        return new InboundItem(productRepository.getBy(item.productNo),
             item.quantity,
             item.unitPrice,
             item.description);

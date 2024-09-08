@@ -9,7 +9,6 @@ import com.study.wmstdd.product.domain.ProductRepository;
 import com.study.wmstdd.product.fixture.ProductFixture;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,8 +32,8 @@ public class RegisterInboundControllerTest {
     @Test
     void registerInbound() {
         // given
-        Mockito.when(productRepository.findById(anyLong()))
-            .thenReturn(Optional.of(ProductFixture.aProduct().build()));
+        Mockito.when(productRepository.getBy(anyLong()))
+            .thenReturn(ProductFixture.aProduct().build());
 
         Long productNo = 1L;
         Long quantity = 1L;
