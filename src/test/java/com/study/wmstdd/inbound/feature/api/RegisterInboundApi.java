@@ -1,8 +1,8 @@
 package com.study.wmstdd.inbound.feature.api;
 
+import com.study.wmstdd.common.Scenario;
 import com.study.wmstdd.inbound.feature.RegisterInboundController;
 import com.study.wmstdd.inbound.feature.RegisterInboundController.Request.Item;
-import com.study.wmstdd.product.common.Scenario;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import java.time.LocalDateTime;
