@@ -1,8 +1,4 @@
-package com.study.wmstdd.product.fixture;
-
-import com.study.wmstdd.product.domain.Category;
-import com.study.wmstdd.product.domain.Product;
-import com.study.wmstdd.product.domain.TemperatureZone;
+package com.study.wmstdd.product.domain;
 
 public class ProductFixture {
 
