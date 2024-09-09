@@ -3,6 +3,8 @@ package com.study.wmstdd.inbound.domain;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 import org.springframework.util.Assert;
@@ -40,6 +43,11 @@ public class Inbound {
     private LocalDateTime estimatedArrivalAt;
     @OneToMany(mappedBy = "inbound", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InboundItem> inboundItems = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    @Comment("입고 상태")
+    @Getter
+    private InboundStatus status = InboundStatus.REQUESTED;
 
     public Inbound(
         String title,
@@ -71,5 +79,12 @@ public class Inbound {
         Assert.notNull(orderRequestedAt, "입고 요청일은 필수입니다.");
         Assert.notNull(estimatedArrivalAt, "예상 도착일은 필수입니다.");
         Assert.notEmpty(inboundItems, "입고 상품은 필수입니다.");
+    }
+
+    public void confirmed() {
+        if (InboundStatus.REQUESTED != status) {
+            throw new IllegalStateException("입고 요청 상태가 아닙니다.");
+        }
+        this.status = InboundStatus.CONFIRMED;
     }
 }
