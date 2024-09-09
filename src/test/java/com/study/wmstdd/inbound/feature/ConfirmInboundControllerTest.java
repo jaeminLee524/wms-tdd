@@ -27,6 +27,6 @@ public class ConfirmInboundControllerTest extends ApiTest {
 
         // then
         Inbound inbound = inboundRepository.getBy(1L);
-        assertThat(inbound.getStatus()).isEqualTo(InboundStatus.CONFIRMED);
+        assertThat(inbound.getInboundStatus()).isEqualTo(InboundStatus.CONFIRMED);
     }
 }
