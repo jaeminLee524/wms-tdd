@@ -12,26 +12,25 @@ class InboundTest {
     @Test
     void confirmed() {
         // given
-        final Inbound inbound = new Inbound();
+        final Inbound inbound = InboundFixture.anInbound().build();
 
         // when
-        InboundStatus status = inbound.getStatus();
+        InboundStatus status = inbound.getInboundStatus();
 
         inbound.confirmed();
 
         // then
         assertThat(status).isEqualTo(InboundStatus.REQUESTED);
-        assertThat(inbound.getStatus()).isEqualTo(InboundStatus.CONFIRMED);
+        assertThat(inbound.getInboundStatus()).isEqualTo(InboundStatus.CONFIRMED);
     }
 
     @DisplayName("[실패케이스] 입고를 승인한다.  - 입고 상태가 요청이 아닌 경우 예외가 발생한다.")
     @Test
     void fail_invalid_status() {
         // given
-        final Inbound inbound = new Inbound();
-
-        // when
-        inbound.confirmed();
+        final Inbound inbound = InboundFixture.anInbound()
+            .inboundStatus(InboundStatus.CONFIRMED)
+            .build();
 
         // then
         assertThatThrownBy(() -> inbound.confirmed())

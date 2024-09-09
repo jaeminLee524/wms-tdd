@@ -47,7 +47,7 @@ public class Inbound {
     @Column(name = "status", nullable = false)
     @Comment("입고 상태")
     @Getter
-    private InboundStatus status = InboundStatus.REQUESTED;
+    private InboundStatus inboundStatus = InboundStatus.REQUESTED;
 
     public Inbound(
         String title,
@@ -78,10 +78,12 @@ public class Inbound {
         String description,
         LocalDateTime orderRequestedAt,
         LocalDateTime estimatedArrivalAt,
-        List<InboundItem> inboundItems
+        List<InboundItem> inboundItems,
+        InboundStatus inboundStatus
     ) {
         this(title, description, orderRequestedAt, estimatedArrivalAt, inboundItems);
         this.inboundNo = inboundNo;
+        this.inboundStatus = inboundStatus;
     }
 
     private static void validateConstructor(String title, String description, LocalDateTime orderRequestedAt, LocalDateTime estimatedArrivalAt,
@@ -94,9 +96,9 @@ public class Inbound {
     }
 
     public void confirmed() {
-        if (InboundStatus.REQUESTED != status) {
+        if (InboundStatus.REQUESTED != inboundStatus) {
             throw new IllegalStateException("입고 요청 상태가 아닙니다.");
         }
-        this.status = InboundStatus.CONFIRMED;
+        this.inboundStatus = InboundStatus.CONFIRMED;
     }
 }
