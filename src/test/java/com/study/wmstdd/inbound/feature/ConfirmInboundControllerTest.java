@@ -7,10 +7,8 @@ import com.study.wmstdd.inbound.domain.InboundItem;
 import com.study.wmstdd.inbound.domain.InboundRepository;
 import com.study.wmstdd.inbound.domain.InboundStatus;
 import com.study.wmstdd.product.fixture.ProductFixture;
-import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,8 +43,7 @@ public class ConfirmInboundControllerTest {
             ))
         );
 
-        Mockito.when(inboundRepository.findById(inboundNo))
-            .thenReturn(Optional.of(inbound));
+        Mockito.when(inboundRepository.getBy(inboundNo)).thenReturn(inbound);
 
         // when
         confirmInboundController.request(inboundNo);
@@ -64,9 +61,7 @@ public class ConfirmInboundControllerTest {
         }
 
         public void request(Long inboundNo) {
-            Inbound inbound = inboundRepository.findById(inboundNo).orElseThrow(
-                () -> new EntityNotFoundException("입고가 존재하지 않습니다. %d".formatted(inboundNo))
-            );
+            Inbound inbound = inboundRepository.getBy(inboundNo);
 
             inbound.confirmed();
         }
