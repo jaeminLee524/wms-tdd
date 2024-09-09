@@ -37,19 +37,4 @@ public class ConfirmInboundControllerTest {
         // then
         assertThat(inbound.getStatus()).isEqualTo(InboundStatus.CONFIRMED);
     }
-
-    private class ConfirmInboundController {
-
-        private final InboundRepository inboundRepository;
-
-        public ConfirmInboundController(InboundRepository inboundRepository) {
-            this.inboundRepository = inboundRepository;
-        }
-
-        public void request(Long inboundNo) {
-            Inbound inbound = inboundRepository.getBy(inboundNo);
-
-            inbound.confirmed();
-        }
-    }
 }
