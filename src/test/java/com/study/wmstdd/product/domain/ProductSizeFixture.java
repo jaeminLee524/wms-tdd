@@ -1,6 +1,4 @@
-package com.study.wmstdd.product.fixture;
-
-import com.study.wmstdd.product.domain.ProductSize;
+package com.study.wmstdd.product.domain;
 
 public class ProductSizeFixture {
 

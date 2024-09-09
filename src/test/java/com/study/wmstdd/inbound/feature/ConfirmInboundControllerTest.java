@@ -3,12 +3,9 @@ package com.study.wmstdd.inbound.feature;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.study.wmstdd.inbound.domain.Inbound;
-import com.study.wmstdd.inbound.domain.InboundItem;
+import com.study.wmstdd.inbound.domain.InboundFixture;
 import com.study.wmstdd.inbound.domain.InboundRepository;
 import com.study.wmstdd.inbound.domain.InboundStatus;
-import com.study.wmstdd.product.fixture.ProductFixture;
-import java.time.LocalDateTime;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,18 +27,7 @@ public class ConfirmInboundControllerTest {
     void confirmInbound() {
         // given
         Long inboundNo = 1L;
-        Inbound inbound = new Inbound(
-            "상품명",
-            "상품코드",
-            LocalDateTime.now(),
-            LocalDateTime.now().plusDays(1),
-            List.of(new InboundItem(
-                ProductFixture.aProduct().build(),
-                1L,
-                1500L,
-                "상품 설명"
-            ))
-        );
+        Inbound inbound = InboundFixture.anInbound().build();
 
         Mockito.when(inboundRepository.getBy(inboundNo)).thenReturn(inbound);
 

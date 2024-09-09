@@ -47,12 +47,40 @@ public class InboundItem {
         Product product,
         Long quantity,
         Long unitPrice,
-        String description) {
+        String description
+    ) {
         validateConstructor(product, quantity, unitPrice, description);
         this.product = product;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
         this.description = description;
+    }
+
+    // visible for testing
+    InboundItem(
+        Long inboundItemNo,
+        Product product,
+        Long quantity,
+        Long unitPrice,
+        String description,
+        Inbound inbound
+    ) {
+        this.inboundItemNo = inboundItemNo;
+        this.product = product;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.description = description;
+        this.inbound = inbound;
+    }
+
+    InboundItem(
+        Long inboundItemNo,
+        Product product,
+        Long quantity,
+        Long unitPrice,
+        String description) {
+        this(product, quantity, unitPrice, description);
+        this.inboundItemNo = inboundItemNo;
     }
 
     private static void validateConstructor(

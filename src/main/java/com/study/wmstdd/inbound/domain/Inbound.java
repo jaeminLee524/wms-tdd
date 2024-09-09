@@ -72,6 +72,18 @@ public class Inbound {
         }
     }
 
+    Inbound(
+        Long inboundNo,
+        String title,
+        String description,
+        LocalDateTime orderRequestedAt,
+        LocalDateTime estimatedArrivalAt,
+        List<InboundItem> inboundItems
+    ) {
+        this(title, description, orderRequestedAt, estimatedArrivalAt, inboundItems);
+        this.inboundNo = inboundNo;
+    }
+
     private static void validateConstructor(String title, String description, LocalDateTime orderRequestedAt, LocalDateTime estimatedArrivalAt,
         List<InboundItem> inboundItems) {
         Assert.hasText(title, "입고 제목은 필수입니다.");
